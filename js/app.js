@@ -1,6 +1,6 @@
 import kernel from "./core/kernel.js";
 import { send } from "./pages/assistant.js";
-import { loadChat } from "./database/chat.js";
+import { loadChat } from "../database/chat.js";
 
 window.addEventListener("load", async () => {
 
