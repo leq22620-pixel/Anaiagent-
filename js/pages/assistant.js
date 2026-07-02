@@ -1,5 +1,5 @@
 import { askGemini } from "../ai/gemini.js";
-import { saveChat } from "../database/chat.js";
+import { saveChat } from "../../database/chat.js";
 
 export async function send() {
 
