@@ -1,20 +1,13 @@
 import CONFIG from "../config.js";
 import { getProfile } from "../../database/profile.js";
+
 export async function askGemini(message) {
 
     try {
 
-        const response = await fetch(CONFIG.API_URL, {
+        const profile = await getProfile();
 
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            const profile = await getProfile();
-
-const prompt = `
+        const prompt = `
 Thông tin người dùng:
 
 Tên: ${profile.name || "Chưa biết"}
@@ -29,19 +22,17 @@ Người dùng hỏi:
 ${message}
 `;
 
-const response = await fetch(CONFIG.API_URL, {
+        const response = await fetch(CONFIG.API_URL, {
 
-    method: "POST",
+            method: "POST",
 
-    headers: {
-        "Content-Type": "application/json"
-    },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-    body: JSON.stringify({
-        message: prompt
-    })
-
-});
+            body: JSON.stringify({
+                message: prompt
+            })
 
         });
 
