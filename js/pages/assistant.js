@@ -1,6 +1,5 @@
 import { askGemini } from "../ai/gemini.js";
 import { saveChat } from "../../database/chat.js";
-import { saveMemory } from "../../database/memory.js";
 import { planner } from "../core/planner.js";
 export async function send() {
 
@@ -8,13 +7,7 @@ export async function send() {
     const messages = document.querySelector("#messages");
 
     const message = input.value.trim();
-    if (message.toLowerCase().startsWith("tôi tên là ")) {
-
-    const name = message.substring(11).trim();
-
-    await saveMemory("name", name);
-
-}
+    
 
 
     if (!message) return;
