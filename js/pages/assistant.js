@@ -1,12 +1,21 @@
 import { askGemini } from "../ai/gemini.js";
 import { saveChat } from "../../database/chat.js";
-
+import { saveMemory } from "../../database/memory.js";
+import { planner } from "../core/planner.js";
 export async function send() {
 
     const input = document.querySelector("#prompt");
     const messages = document.querySelector("#messages");
 
     const message = input.value.trim();
+    if (message.toLowerCase().startsWith("tôi tên là ")) {
+
+    const name = message.substring(11).trim();
+
+    await saveMemory("name", name);
+
+}
+
 
     if (!message) return;
 
@@ -17,8 +26,24 @@ export async function send() {
 `;
 
     await saveChat("user", message);
-
     input.value = "";
+const action = await planner(message);
+
+if (action.handled) {
+
+    messages.innerHTML += `
+<div class="ai">
+🤖 ${action.reply}
+</div>
+`;
+
+    await saveChat("ai", action.reply);
+
+    messages.scrollTop = messages.scrollHeight;
+
+    return;
+}
+    
 
     const reply = await askGemini(message);
 

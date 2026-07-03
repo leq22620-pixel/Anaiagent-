@@ -1,6 +1,6 @@
 const DB_NAME="AnOS";
 
-const DB_VERSION=1;
+const DB_VERSION=2;
 
 export async function openDatabase(){
 
@@ -44,9 +44,7 @@ if(!db.objectStoreNames.contains("memory")){
 
 db.createObjectStore("memory",{
 
-keyPath:"id",
-
-autoIncrement:true
+keyPath:"key"
 
 });
 
