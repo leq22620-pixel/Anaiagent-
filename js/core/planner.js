@@ -73,7 +73,16 @@ export async function planner(message) {
                 : "Mình chưa biết sở thích của bạn."
         );
     }
+if (text === "mục tiêu của tôi là gì") {
 
+    const goal = await getMemory("goal");
+
+    return reply(
+        goal
+            ? `Mục tiêu của bạn là ${goal}.`
+            : "Mình chưa biết mục tiêu của bạn."
+    );
+}
     // =====================
     // LƯU THÔNG TIN
     // =====================
@@ -129,6 +138,16 @@ export async function planner(message) {
             `Được rồi, mình sẽ nhớ bạn thích ${favorite}.`
         );
     }
+    if (text.startsWith("mục tiêu của tôi là ")) {
+
+    const goal = message.substring(20).trim();
+
+    return await remember(
+        "goal",
+        goal,
+        `Được rồi, mình sẽ nhớ mục tiêu của bạn là ${goal}.`
+    );
+}
 
     // =====================
     // CÔNG VIỆC

@@ -7,7 +7,10 @@ const KEYS = [
     "favorite",
     "goal",
     "birthday",
-    "email"
+    "email",
+    "phone",
+    "company",
+    "hobby"
 ];
 
 export async function getProfile() {
