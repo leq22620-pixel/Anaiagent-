@@ -112,6 +112,28 @@ if (text === "mục tiêu của tôi là gì") {
             : "Mình chưa biết mục tiêu của bạn."
     );
 }
+if (text === "hồ sơ của tôi") {
+
+    const name = await getMemory("name");
+    const job = await getMemory("job");
+    const city = await getMemory("city");
+    const favorite = await getMemory("favorite");
+    const goal = await getMemory("goal");
+    const email = await getMemory("email");
+    const phone = await getMemory("phone");
+
+    return reply(
+`👤 Hồ sơ của bạn
+
+Tên: ${name || "Chưa có"}
+Nghề: ${job || "Chưa có"}
+Nơi ở: ${city || "Chưa có"}
+Sở thích: ${favorite || "Chưa có"}
+Mục tiêu: ${goal || "Chưa có"}
+Email: ${email || "Chưa có"}
+Số điện thoại: ${phone || "Chưa có"}`
+    );
+}
     // =====================
     // LƯU THÔNG TIN
     // =====================
