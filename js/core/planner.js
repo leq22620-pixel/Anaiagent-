@@ -73,6 +73,26 @@ export async function planner(message) {
                 : "Mình chưa biết sở thích của bạn."
         );
     }
+    if (text === "email của tôi là gì") {
+
+    const email = await getMemory("email");
+
+    return reply(
+        email
+            ? `Email của bạn là ${email}.`
+            : "Mình chưa biết email của bạn."
+    );
+}
+if (text === "số điện thoại của tôi là gì") {
+
+    const phone = await getMemory("phone");
+
+    return reply(
+        phone
+            ? `Số điện thoại của bạn là ${phone}.`
+            : "Mình chưa biết số điện thoại của bạn."
+    );
+}
 if (text === "mục tiêu của tôi là gì") {
 
     const goal = await getMemory("goal");
@@ -138,6 +158,32 @@ if (text === "mục tiêu của tôi là gì") {
             `Được rồi, mình sẽ nhớ bạn thích ${favorite}.`
         );
     }
+    if (
+    text.startsWith("email của tôi là ") &&
+    text !== "email của tôi là gì"
+) {
+
+    const email = message.substring(18).trim();
+
+    return await remember(
+        "email",
+        email,
+        `Được rồi, mình sẽ nhớ email của bạn là ${email}.`
+    );
+}
+if (
+    text.startsWith("số điện thoại của tôi là ") &&
+    text !== "số điện thoại của tôi là gì"
+) {
+
+    const phone = message.substring(25).trim();
+
+    return await remember(
+        "phone",
+        phone,
+        `Được rồi, mình sẽ nhớ số điện thoại của bạn là ${phone}.`
+    );
+}
     if (text.startsWith("mục tiêu của tôi là ")) {
 
     const goal = message.substring(20).trim();
