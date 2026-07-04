@@ -109,7 +109,7 @@ if (text === "mục tiêu của tôi là gì") {
 
     if (text.startsWith("tôi tên là ")) {
 
-        const name = message.substring(11).trim();
+        const name = message.replace(/^Tôi tên là\s*/i, "").trim();
 
         console.log("Lưu tên:", name);
 
@@ -122,7 +122,7 @@ if (text === "mục tiêu của tôi là gì") {
 
     if (text.startsWith("tôi là ")) {
 
-        const job = message.substring(7).trim();
+        const job = message.replace(/^Tôi là\s*/i, "").trim();
 
         return await remember(
             "job",
@@ -136,7 +136,7 @@ if (text === "mục tiêu của tôi là gì") {
         text !== "tôi sống ở đâu"
     ) {
 
-        const city = message.substring(10).trim();
+        const city = message.replace(/^Tôi sống ở\s*/i, "").trim();
 
         return await remember(
             "city",
@@ -150,7 +150,7 @@ if (text === "mục tiêu của tôi là gì") {
         text !== "tôi thích gì"
     ) {
 
-        const favorite = message.substring(10).trim();
+        const favorite = message.replace(/^Tôi thích\s*/i, "").trim();
 
         return await remember(
             "favorite",
@@ -163,7 +163,7 @@ if (text === "mục tiêu của tôi là gì") {
     text !== "email của tôi là gì"
 ) {
 
-    const email = message.substring(18).trim();
+    const email = message.replace(/^Email của tôi là\s*/i, "").trim();
 
     return await remember(
         "email",
@@ -176,7 +176,7 @@ if (
     text !== "số điện thoại của tôi là gì"
 ) {
 
-    const phone = message.substring(25).trim();
+    const phone = message.replace(/^Số điện thoại của tôi là\s*/i, "").trim();
 
     return await remember(
         "phone",
