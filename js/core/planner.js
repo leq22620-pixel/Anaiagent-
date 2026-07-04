@@ -16,14 +16,17 @@ async function remember(key, value, message) {
 function normalize(text) {
     return text
         .toLowerCase()
-        .trim()
         .replace(/\?/g, "")
-        .replace(/\./g, "");
+        .replace(/\./g, "")
+        .replace(/\s+/g, " ")
+        .trim();
 }
 
 export async function planner(message) {
 
     const text = normalize(message);
+
+console.log("Planner nhận:", text);
 
     // =====================
     // HỎI THÔNG TIN (đặt trước)
@@ -73,7 +76,10 @@ export async function planner(message) {
                 : "Mình chưa biết sở thích của bạn."
         );
     }
-    if (text === "email của tôi là gì") {
+    if (
+    text.includes("email") &&
+    text.includes("là gì")
+) {
 
     const email = await getMemory("email");
 
@@ -83,7 +89,10 @@ export async function planner(message) {
             : "Mình chưa biết email của bạn."
     );
 }
-if (text === "số điện thoại của tôi là gì") {
+if (
+    text.includes("số điện thoại") &&
+    text.includes("là gì")
+) {
 
     const phone = await getMemory("phone");
 
@@ -186,7 +195,7 @@ if (
 }
     if (text.startsWith("mục tiêu của tôi là ")) {
 
-    const goal = message.substring(20).trim();
+    const goal = message.replace(/^Mục tiêu của tôi là\s*/i, "").trim();
 
     return await remember(
         "goal",
